@@ -3,7 +3,12 @@ import React, {useState, CSSProperties, use } from 'react';
 
 const noMessages: string[] = ["Are you sure?", "Think again!", "Reconsider?", "Last chance!", "Surely not?", "You're breaking my heart", "Have a heart!", "Don't be cold", "Change your mind?", "No isn't an option!"];
 const activities: string[] = ['Dinner Date', 'Brunch', 'Shopping', 'Explore', 'Simple Walk', 'Surprise Me'];
-const today = new Date().toISOString().split('T')[0];
+const getLocalDateString = (date: Date): string => {
+  const offset = date.getTimezoneOffset();
+  const localDate = new Date(date.getTime() - offset * 60_000);
+  return localDate.toISOString().slice(0, 10);
+}
+const today = getLocalDateString(new Date());
 
 export default function Home() {
   const [screen, setScreen] = useState<number>(1)
@@ -113,8 +118,9 @@ export default function Home() {
             <input 
               type="date" 
               min={today}
+              value={selectedDate}
               style={styles.dateInput}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedDate(e.target.value)} 
+              onChange={(e) => {const picked = e.target.value; if (!picked || picked < today) setSelectedDate(picked)}}
             />
             <br />
             <button 
