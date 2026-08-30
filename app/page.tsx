@@ -31,9 +31,9 @@ export default function Home() {
           body: JSON.stringify({ event: activity, date: selectedDate, start_time: startTime, end_time: endTime,  name: name}),
       })
       if (response.ok){
-        setScreen(5);
+        setScreen(6);
       } else {
-        alert('Something went wrong. Please try again!')
+        alert('Something went wrong 💀🥀 Its probably because the free tier has ran out of free email quota whoops, contact me directly instead sorry')
       }
     } catch (error) {
       alert('Network error')

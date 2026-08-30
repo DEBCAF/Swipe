@@ -33,7 +33,7 @@ export async function POST(request: Request) {
         const safe_start_time = escapeHTML(start_time)
         const safe_end_time = escapeHTML(end_time)
 
-        const subject = '[New Date Booking] ${safe_name} for ${event}'
+        const subject = `[New Date Booking] ${safe_name} for ${event}`
         let htmlContent = `
             <h2>New Date Booking</h2>
             <p><strong>Name:</strong> ${safe_name}</p>
