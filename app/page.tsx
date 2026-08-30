@@ -7,8 +7,13 @@ const getLocalDateString = (date: Date): string => {
   const offset = date.getTimezoneOffset();
   const localDate = new Date(date.getTime() - offset * 60_000);
   return localDate.toISOString().slice(0, 10);
-}
-const today = new Date().toISOString().split('T')[0];
+};
+const today = getLocalDateString(new Date());
+
+const isDateOnOrAfterToday = (dateString: string): boolean => {
+  if (!dateString) return false;
+  return dateString >= today;
+};
 
 export default function Home() {
   const [screen, setScreen] = useState<number>(1)
@@ -25,6 +30,30 @@ export default function Home() {
     if (noClickCount <10) {
       setNoClickCount((prev) => prev +1)
     }
+  }
+
+  const handleDateChange = (value: string): void => {
+    if (!value) {
+      setSelectedDate('');
+      return;
+    }
+
+    if (!isDateOnOrAfterToday(value)) {
+      setSelectedDate('');
+      alert('Please choose a date today or later.');
+      return;
+    }
+
+    setSelectedDate(value);
+  }
+
+  const handleDateContinue = (): void => {
+    if (!isDateOnOrAfterToday(selectedDate)) {
+      alert('Please choose a date today or later.');
+      return;
+    }
+
+    setScreen(4);
   }
 
   async function handleBooking(): Promise<void> {
@@ -120,13 +149,13 @@ export default function Home() {
               min={today}
               value={selectedDate}
               style={styles.dateInput}
-              onChange={(e) => {const picked = e.target.value; if (!picked || picked < today) setSelectedDate(picked)}}
+              onChange={(e) => handleDateChange(e.target.value)}
             />
             <br />
             <button 
               style={styles.btn}
               disabled={!selectedDate}
-              onClick={() => setScreen(4)}
+              onClick={handleDateContinue}
             >
               Continue
             </button>
