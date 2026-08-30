@@ -8,7 +8,7 @@ const getLocalDateString = (date: Date): string => {
   const localDate = new Date(date.getTime() - offset * 60_000);
   return localDate.toISOString().slice(0, 10);
 }
-const today = getLocalDateString(new Date());
+const today = new Date().toISOString().split('T')[0];
 
 export default function Home() {
   const [screen, setScreen] = useState<number>(1)
