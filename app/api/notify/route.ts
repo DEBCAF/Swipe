@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server"
 import {Resend} from "resend"
 
-const allowedEvents = new Set(['dinner date', 'shopping', 'explore', 'simple walk', 'brunch', 'surprise me'])
+const allowedEvents = new Set(['Dinner Date', 'Shopping', 'Explore', 'Simple Walk', 'Brunch', 'Surprise Me'])
 
 function escapeHTML(value: string) {
   return value.replace(/[&<>'"']/g, (character) => ({
