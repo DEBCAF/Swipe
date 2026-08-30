@@ -228,6 +228,15 @@ export default function Home() {
             >
               {isSending ? 'Sending...' : 'Lock it in'}
             </button>
+            /*
+            <button
+              style={styles.btn}
+              disabled={!name || isSending}
+              onClick={() => setScreen(6)}
+            >
+              {isSending ? 'Pretending...' : 'Pretend to send'}
+            </button>
+            */
           </div>
         )}
 
