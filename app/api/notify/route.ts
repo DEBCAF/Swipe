@@ -9,7 +9,7 @@ function escapeHTML(value: string) {
     '<': '&lt;',
     '>': '&gt;',
     "'": '&#39;',
-    '"': '&qout;',
+    '"': '&quot;',
   })[character]!)
 }
 
