@@ -19,6 +19,7 @@ export default function Home() {
   const [screen, setScreen] = useState<number>(1)
   const [noClickCount, setNoClickCount] = useState<number>(0)
   const [selectedDate, setSelectedDate] = useState('')
+  const [dateError, setDateError] = useState('')
   const [startTime, setStartTime] = useState('09:00')
   const [endTime, setEndTime] = useState('10:00')
   const [activity, setActivity] = useState('')
@@ -35,24 +36,31 @@ export default function Home() {
   const handleDateChange = (value: string): void => {
     if (!value) {
       setSelectedDate('');
+      setDateError('Please pick a date.');
       return;
     }
 
     if (!isDateOnOrAfterToday(value)) {
-      setSelectedDate('');
-      alert('Please choose a date today or later.');
+      setDateError('Please choose a date today or later.');
       return;
     }
 
     setSelectedDate(value);
+    setDateError('');
   }
 
   const handleDateContinue = (): void => {
-    if (!isDateOnOrAfterToday(selectedDate)) {
-      alert('Please choose a date today or later.');
+    if (!selectedDate) {
+      setDateError('Please pick a date.');
       return;
     }
 
+    if (!isDateOnOrAfterToday(selectedDate)) {
+      setDateError('Please choose a date today or later.');
+      return;
+    }
+
+    setDateError('');
     setScreen(4);
   }
 
@@ -151,6 +159,9 @@ export default function Home() {
               style={styles.dateInput}
               onChange={(e) => handleDateChange(e.target.value)}
             />
+            {dateError && (
+              <p style={styles.dateError}>{dateError}</p>
+            )}
             <br />
             <button 
               style={styles.btn}
@@ -302,6 +313,12 @@ const styles: Record<string, CSSProperties> = {
     margin: '15px 0',
     borderRadius: '8px',
     border: '1px solid #ffb3c1',
+  },
+  dateError: {
+    margin: '0 0 10px',
+    color: '#c9184a',
+    fontSize: '0.85rem',
+    fontWeight: 600,
   },
   grid: {
     display: 'grid',
