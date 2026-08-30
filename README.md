@@ -1,6 +1,6 @@
 # Swipe
 
-A personal website to ASK YOUR CRUSH OUT!! It is currently coded to me, so you can also rewrite it to fit your own booking workflow.
+A personal website to ASK YOUR CRUSH OUT!! It is currently coded to me, so you can also rewrite it to fit you!
 
 ## Features
 
